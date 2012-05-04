@@ -2,3 +2,4 @@
 vendor/bundle
 tmp/
 log/
+bin/

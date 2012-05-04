@@ -1,3 +1,12 @@
 source :rubygems
 
 gem 'sinatra'
+gem 'meta-spotify'
+gem 'redis'
+gem 'httparty', "0.5.0"
+gem 'crack', "0.2.0"
+gem 'json'
+
+group :development do
+  gem 'shotgun'
+end

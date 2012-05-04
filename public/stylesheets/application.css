@@ -1,0 +1,124 @@
+/*** Reset ***/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+body {
+  line-height: 1;
+  font-size:62.5%;
+}
+body, form input, form button{
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-weight: 300;
+}
+a{
+  color:#007828;
+}
+ol, ul {
+  list-style: none;
+}
+
+/*** Style ***/
+
+/*** Colors
+ *
+ * green: #007828;
+ * dark green: #075220;
+ * light green: #1D9E48;
+ * red: #9E0601;
+ * dark red: #520907;
+ *
+ ***/
+
+/*** Header ***/
+header {
+  width:90%;
+  padding:10px 5%;
+  position: fixed;
+  top:0;
+  background: #007828;
+  background: -moz-linear-gradient(top,  #007828 0%, #075220 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#007828), color-stop(100%,#075220));
+  background: -webkit-linear-gradient(top,  #007828 0%,#075220 100%);
+  background: -o-linear-gradient(top,  #007828 0%,#075220 100%);
+  background: -ms-linear-gradient(top,  #007828 0%,#075220 100%);
+  background: linear-gradient(top,  #007828 0%,#075220 100%);
+}
+header h1{
+  margin: 0 auto;
+  font-size:2.4em;
+  color:#fff;
+  text-align:center;
+  font-family: "Arial Black", sans-serif;
+  text-shadow:1px 1px 0 #075220;
+}
+
+/*** Main ***/
+section{
+  margin: 0 auto;
+  padding-bottom:4.8em;
+}
+section form.search{
+  display: block;
+  width:90%;
+  padding:10px 5%;
+  text-align:center;
+  border-bottom:1px solid #ccc;
+  position: fixed;
+  background-color: #fff;
+  top:44px;
+}
+section form.search input{
+  width:80%;
+  font-size:1.6em;
+  color:#333;
+}
+section ol.tracks{
+  padding-top:90px;
+}
+section ol li{
+  width:90%;
+  padding:0 5%;
+  border-bottom:1px solid #CCC;
+}
+section ol li h2{
+  font-size:1.6em;
+  line-height:2.5;
+}
+
+/*** Footer ***/
+footer{
+  width:90%;
+  padding:0.4em 5%;
+  height:4em;
+  position: fixed;
+  bottom:0;
+  border-top:1px solid #ccc;
+  background-color:#fff;
+}
+footer p{
+  font-size:1.4em;
+  line-height:2.5;
+  color:#555;
+}
