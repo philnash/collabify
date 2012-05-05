@@ -30,7 +30,9 @@ get '/search' do
 end
 
 post '/add' do
-  Redis.current.rpush 'collabify:tracks', params[:uri]
+  if Redis.current.rpush 'collabify:tracks', params[:uri]
+    flash[:notice] = "Sounds good to me, it's in the queue."
+  end
   redirect '/'
 end
 
