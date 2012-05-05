@@ -8,5 +8,5 @@ gem 'crack', "0.2.0"
 gem 'json'
 
 group :development do
-  gem 'shotgun'
+  gem 'powder'
 end
