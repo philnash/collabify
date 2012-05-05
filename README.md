@@ -17,6 +17,12 @@ We require you use Pow as your webserver due to hard-coded links in the client a
 
 ## Running the client ##
 
+You will need developer credentials applied to your Spotify account. To do so, login with you Spotify details here: https://developer.spotify.com/login/
+
+Once you have a developer account, you will then need a development build of Spotify. We are currently using Spotify version 0.8.3.xxx
+
+After all that, you are ready to launch the app.
+
 First, copy the `client` directory to `~/Spotify/collabify`
 
     mkdir ~/Spotify
