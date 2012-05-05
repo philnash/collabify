@@ -1,5 +1,9 @@
 require 'sinatra'
 require 'erb'
+require 'rack-flash'
+
+use Rack::Flash
+enable :sessions
 
 configure :development do
   Redis.current = Redis.new
@@ -12,8 +16,14 @@ end
 get '/search' do
   if params[:query] && !params[:query].empty?
     results = MetaSpotify::Track.search(params[:query])
-    @tracks = results[:tracks].select { |t| t.album.is_available_in?('gb') }
-    erb :index
+    results = results[:tracks].select { |t| t.album.is_available_in?('gb') }
+    if results.any?
+      @tracks = results
+      erb :index
+    else
+      flash[:error] = "Hey hipster, we've never heard of that one."
+      redirect '/'
+    end
   else
     redirect '/'
   end

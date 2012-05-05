@@ -11,6 +11,8 @@ GEM
     powder (0.1.7)
       thor (>= 0.11.5)
     rack (1.4.1)
+    rack-flash (0.1.2)
+      rack
     rack-protection (1.2.0)
       rack
     redis (2.2.2)
@@ -30,5 +32,6 @@ DEPENDENCIES
   json
   meta-spotify
   powder
+  rack-flash
   redis
   sinatra
