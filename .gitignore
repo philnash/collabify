@@ -1,5 +1,6 @@
-.bundle/config
-vendor/bundle
-tmp/
-log/
-bin/
+server/.bundle/
+server/tmp/
+server/vendor/
+server/tmp/
+server/log/
+server/bin/
