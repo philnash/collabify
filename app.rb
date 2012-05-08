@@ -4,6 +4,7 @@ require 'rack-flash'
 
 use Rack::Flash
 enable :sessions
+set :protection, except: :session_hijacking
 
 configure :development do
   Redis.current = Redis.new
