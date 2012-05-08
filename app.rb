@@ -6,12 +6,7 @@ use Rack::Flash
 
 set :env, ENV["RACK_ENV"]
 
-configure :development do
-  $redis = Redis.new
-end
-configure :production do
-  $redis = Redis.connect(:url => ENV['REDISTOGO_URL'])
-end
+$redis = Redis.connect(:url => ENV['REDISTOGO_URL'])
 
 get '/' do
   @title = production? ? "production" : "not production"
@@ -35,7 +30,7 @@ get '/search' do
 end
 
 post '/add' do
-  if Redis.current.rpush 'collabify:tracks', params[:uri]
+  if $redis.rpush 'collabify:tracks', params[:uri]
     flash[:notice] = "Sounds good to me, it's in the queue."
   end
   redirect '/'
@@ -46,8 +41,8 @@ post '/clear_queue' do
 end
 
 get '/list' do
-  length = Redis.current.llen 'collabify:tracks'
-  @tracks = Redis.current.lrange 'collabify:tracks', 0, length
+  length = $redis.llen 'collabify:tracks'
+  @tracks = $redis.lrange 'collabify:tracks', 0, length
   content_type :json
   @tracks.to_json
 end
