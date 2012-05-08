@@ -4,6 +4,8 @@ enable :sessions
 set :session_secret, 'f2580028413ac5ea0894c1e7a88a7442e4fcf69507144a78d61dc3f76d32da60'
 use Rack::Flash
 
+set :env, ENV["RACK_ENV"]
+
 configure :development do
   Redis.current = Redis.new
 end
@@ -13,6 +15,7 @@ configure :production do
 end
 
 get '/' do
+  @title = production? ? "production" : "not production"
   erb :index
 end
 
