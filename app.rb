@@ -10,8 +10,7 @@ configure :development do
   Redis.current = Redis.new
 end
 configure :production do
-  uri = URI.parse(ENV["REDISTOGO_URL"])
-  Redis.current = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
+  Redis.current = Redis.connect(:url => ENV['REDISTOGO_URL'])
 end
 
 get '/' do
