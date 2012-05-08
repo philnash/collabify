@@ -25,6 +25,11 @@ GEM
       rack
     rack-protection (1.2.0)
       rack
+    rack-test (0.6.1)
+      rack (>= 1.0)
+    racksh (0.9.11)
+      rack (>= 1.0)
+      rack-test (>= 0.5)
     redis (2.2.2)
     rest-client (1.6.7)
       mime-types (>= 1.16)
@@ -48,5 +53,6 @@ DEPENDENCIES
   powder
   rack (= 1.3.6)
   rack-flash
+  racksh
   redis
   sinatra
