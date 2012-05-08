@@ -1,10 +1,8 @@
-require 'sinatra'
 require 'erb'
-require 'rack-flash'
 
-use Rack::Flash
 enable :sessions
-set :protection, except: :session_hijacking
+set :session_secret, 'f2580028413ac5ea0894c1e7a88a7442e4fcf69507144a78d61dc3f76d32da60'
+use Rack::Flash
 
 configure :development do
   Redis.current = Redis.new
