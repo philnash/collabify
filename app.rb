@@ -7,10 +7,10 @@ use Rack::Flash
 set :env, ENV["RACK_ENV"]
 
 configure :development do
-  Redis.current = Redis.new
+  $redis = Redis.new
 end
 configure :production do
-  Redis.current = Redis.connect(:url => ENV['REDISTOGO_URL'])
+  $redis = Redis.connect(:url => ENV['REDISTOGO_URL'])
 end
 
 get '/' do
