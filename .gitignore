@@ -1,6 +1,6 @@
-server/.bundle/
-server/tmp/
-server/vendor/
-server/tmp/
-server/log/
-server/bin/
+.bundle/
+tmp/
+vendor/
+tmp/
+log/
+bin/
