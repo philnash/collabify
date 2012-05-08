@@ -1,59 +1,96 @@
-var SPIN_OPTIONS = {
-  lines: 7, // The number of lines to draw
-  length: 1, // The length of each line
-  width: 4, // The line thickness
-  radius: 4, // The radius of the inner circle
-  rotate: 0, // The rotation offset
-  color: '#fff', // #rgb or #rrggbb
-  speed: 1, // Rounds per second
-  trail: 60, // Afterglow percentage
-  shadow: false, // Whether to render a shadow
-  hwaccel: true, // Whether to use hardware acceleration
-  className: 'spinner', // The CSS class to assign to the spinner
-  zIndex: 2e9, // The z-index (defaults to 2000000000)
-  top: 'auto', // Top position relative to parent in px
-  left: 'auto' // Left position relative to parent in px
+var Collabify = {
+  ajax: function($form, opts){
+    $.ajax(
+      $.extend({
+        url:      $form.attr('action') + '.js',
+        type:     $form.attr('method'),
+        data:     $form.serialize(),
+        dataType: 'json'
+      },
+      opts
+    )
+  )},
+  removeFlash: function(){
+    if(Collabify.timeout !== null){
+      clearTimeout(Collabify.timeout);
+      Collabify.timeout = null;
+    }
+    $('.alert').fadeOut('fast', function(){
+      $(this).remove();
+    });
+  },
+  displayFlash: function(message, type){
+    var $flash = $('<div class="alert '+type+'"><p>'+message+'</p></div>');
+    $flash.hide();
+    $('form.search').after($flash);
+    $flash.fadeIn('fast');
+    Collabify.timeout = setTimeout(function() {
+      $flash.fadeOut('fast');
+    }, 10000);
+  },
+  spinOptions: {
+    lines: 7,
+    length: 1,
+    width: 4,
+    radius: 4,
+    rotate: 0,
+    color: '#fff',
+    speed: 1,
+    trail: 60,
+    shadow: false,
+    hwaccel: true,
+    className: 'spinner',
+    zIndex: 2e9,
+    top: 'auto',
+    left: 'auto'
+  },
+  timeout: null
 };
 
 $(function(){
+  $.ajaxSetup({
+    beforeSend: function(xhr){
+      xhr.setRequestHeader('Accept', 'text/javascript');
+      Collabify.removeFlash();
+    }
+  });
+
   $('form.search').on('submit', function(e){
     var $form = $(this),
         $tracks = $('div.tracks'),
-        spinner;
-    SPIN_OPTIONS.color = '#333';
-    spinner = new Spinner(SPIN_OPTIONS);
+        spinner, spinOptions;
     e.preventDefault();
+    spinOptions = $.extend({}, Collabify.spinOptions);
+    spinOptions.color = '#333';
+    spinner = new Spinner(spinOptions);
     $tracks.empty();
     spinner.spin($tracks[0]);
-    $.ajax({
-      url: $form.attr('action')+'.js',
-      data: $form.serialize(),
-      dataType: 'json',
-      type: $form.attr('method'),
+    Collabify.ajax($form, {
       success: function(data){
         spinner.stop();
-        $tracks.html(data.view);
+        if(data.status == 200){
+          $tracks.html(data.view);
+        }else{
+          $tracks.empty();
+          Collabify.displayFlash(data.message, data.type)
+        }
       }
     });
   });
 
-
-  $('ol li form').on('submit', function(e){
+  $('div.tracks').on('submit', 'form', function(e){
     var $form = $(this),
         $button = $form.find('button'),
-        spinner = new Spinner(SPIN_OPTIONS);
+        spinner = new Spinner(Collabify.spinOptions);
     e.preventDefault();
     $button.hide();
     spinner.spin($form[0]);
-    $.ajax({
-      url: $form.attr('action')+'.js',
-      data: $form.serialize(),
-      dataType: 'json',
-      type: $form.attr('method'),
+    Collabify.ajax($form, {
       success: function(data){
         spinner.stop();
         $form.html('<p>✔</p>');
+        Collabify.displayFlash(data.message, data.type);
       }
-    })
+    });
   });
 });

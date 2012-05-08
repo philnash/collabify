@@ -3,10 +3,16 @@
   <button type="submit">Search</button>
 </form>
 
+<% %w[notice error].each do |key| %>
+  <% if flash[key] %>
+    <div class="alert <%= key %>">
+      <p><%= flash[key] %></p>
+    </div>
+  <% end %>
+<% end %>
+
 <div class="tracks">
   <% if @tracks %>
-    <% if @tracks.any? %>
-      <%= erb :tracks, :layout => false %>
-    <% end %>
+    <%= erb :tracks, :layout => false %>
   <% end %>
 </div>

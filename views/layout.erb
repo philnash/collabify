@@ -11,13 +11,6 @@
     <section>
       <%= yield %>
     </section>
-    <% %w[notice error].each do |key| %>
-      <% if flash[key] %>
-        <div class="alert <%= key %>">
-          <%= flash[key] %>
-        </div>
-      <% end %>
-    <% end %>
     <footer>
       <p>Collabify - add your tracks to the playlist! <a href="http://twitter.com/MusicTechMeetup">MusicTechMeetup</a></p>
     </footer>
