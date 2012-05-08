@@ -10,4 +10,5 @@ gem 'sinatra'
 
 group :development do
   gem 'powder'
+  gem 'heroku'
 end
