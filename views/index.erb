@@ -3,18 +3,10 @@
   <button type="submit">Search</button>
 </form>
 
-<% if @tracks %>
-  <% if @tracks.any? %>
-    <ol class="tracks">
-      <% @tracks.each do |track| %>
-        <li>
-          <h2><%= track.name %> - <%= track.artists.map { |a| a.name }.join(', ') %></h2>
-          <form action="/add" method="post">
-            <input type="hidden" name="uri" value="<%= track.uri %>">
-            <button type="submit">Add</button>
-          </form>
-        </li>
-      <% end %>
-    </ol>
+<div class="tracks">
+  <% if @tracks %>
+    <% if @tracks.any? %>
+      <%= erb :tracks, :layout => false %>
+    <% end %>
   <% end %>
-<% end %>
+</div>
