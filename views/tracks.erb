@@ -6,6 +6,8 @@
         <p><%= track.artists.map { |a| a.name }.join(', ') %></p>
         <form action="/add" method="post">
           <input type="hidden" name="uri" value="<%= track.uri %>">
+          <input type="hidden" name="track" value="<%= track.name %>">
+          <input type="hidden" name="artist" value="<%= track.artists.map { |a| a.name }.join(', ') %>">
           <button type="submit">+</button>
         </form>
       </li>

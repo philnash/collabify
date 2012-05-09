@@ -1,0 +1,12 @@
+<div class="tracks">
+  <% if @tracks.any? %>
+    <ol class="tracks">
+      <% @tracks.each do |track| %>
+        <li>
+          <h2><%= track['track'] %></h2>
+          <p><%= track['artist'] %></p>
+        </li>
+      <% end %>
+    </ol>
+  <% end %>
+</div>

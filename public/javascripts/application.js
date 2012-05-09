@@ -25,8 +25,8 @@ var Collabify = {
     $('form.search').after($flash);
     $flash.fadeIn('fast');
     Collabify.timeout = setTimeout(function() {
-      $flash.fadeOut('fast');
-    }, 10000);
+      Collabify.removeFlash();
+    }, 1000);
   },
   spinOptions: {
     lines: 7,

@@ -1,16 +1,3 @@
-<form action="/search" method="get" class="search">
-  <input type="search" name="query" id="query">
-  <button type="submit">Search</button>
-</form>
-
-<% %w[notice error].each do |key| %>
-  <% if flash[key] %>
-    <div class="alert <%= key %>">
-      <p><%= flash[key] %></p>
-    </div>
-  <% end %>
-<% end %>
-
 <div class="tracks">
   <% if @tracks %>
     <%= erb :tracks, :layout => false %>

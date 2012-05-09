@@ -39,7 +39,8 @@ get '/search.?:format?' do
 end
 
 post '/add.?:format?' do
-  if $redis.rpush 'collabify:tracks', params[:uri]
+  track = params.select { |k,v| ['uri', 'track', 'artist'].include?(k) }.to_json
+  if $redis.rpush 'collabify:tracks', track
     message = "Sounds good to me, it's in the queue."
     if params[:format] == 'js'
       {:status => 200, :message => message, :type => 'notice'}.to_json
@@ -54,10 +55,15 @@ post '/clear_queue' do
 
 end
 
-get '/list' do
+get '/list.?:format?' do
   length = $redis.llen 'collabify:tracks'
   @tracks = $redis.lrange 'collabify:tracks', 0, length
-  content_type :json
-  @tracks.to_json
+  @tracks.map! { |t| JSON.parse(t) }
+  if params[:format] == 'js'
+    content_type :json
+    @tracks.to_json
+  else
+    erb :list
+  end
 end
 
