@@ -126,6 +126,9 @@ section ol li form{
   line-height:1;
 }
 section ol li form button{
+  display: block;
+  width:100%;
+  padding:0;
   border:none;
   background:transparent none;
   font-size:2em;
