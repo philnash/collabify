@@ -10,7 +10,6 @@ $redis = Redis.new
 # $redis = Redis.connect(:url => ENV['REDISTOGO_URL'])
 
 get '/' do
-  @title = production? ? "production" : "not production"
   erb :index
 end
 
