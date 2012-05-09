@@ -6,8 +6,8 @@ use Rack::Flash
 
 set :env, ENV["RACK_ENV"]
 
-$redis = Redis.new
-# $redis = Redis.connect(:url => ENV['REDISTOGO_URL'])
+# $redis = Redis.new
+$redis = Redis.connect(:url => ENV['REDISTOGO_URL'])
 
 get '/' do
   erb :index
