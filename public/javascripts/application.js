@@ -26,7 +26,7 @@ var Collabify = {
     $flash.fadeIn('fast');
     Collabify.timeout = setTimeout(function() {
       Collabify.removeFlash();
-    }, 1000);
+    }, 10000);
   },
   spinOptions: {
     lines: 7,
