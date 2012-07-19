@@ -17,8 +17,13 @@ get '/search.?:format?' do
   begin
     if params[:query] && !params[:query].empty?
       if params[:query] =~ /(R|r)ick/
-        flash[:error] = "HAHAHAHAHHA. No."
-        erb :index
+        message = "HAHAHAHAHHA. No."
+        if params[:format] == 'js'
+          {:status => 403, :message => message, :type => 'error'}
+        else
+          flash[:error] = message
+          erb :index
+        end
       end
       results = MetaSpotify::Track.search(params[:query])
       @tracks = results[:tracks].select { |t| t.album.is_available_in?('gb') }
