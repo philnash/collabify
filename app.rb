@@ -19,18 +19,19 @@ get '/search.?:format?' do
       if params[:query] =~ /(R|r)ick/
         message = "HAHAHAHAHHA. No."
         if params[:format] == 'js'
-          {:status => 403, :message => message, :type => 'error'}
+          {:status => 403, :message => message, :type => 'error'}.to_json
         else
           flash[:error] = message
           erb :index
         end
-      end
-      results = MetaSpotify::Track.search(params[:query])
-      @tracks = results[:tracks].select { |t| t.album.is_available_in?('gb') }
-      if params[:format] == 'js'
-        { :status => 200, :view => erb(:tracks, :layout => false) }.to_json
       else
-        erb :index
+        results = MetaSpotify::Track.search(params[:query])
+        @tracks = results[:tracks].select { |t| t.album.is_available_in?('gb') }
+        if params[:format] == 'js'
+          { :status => 200, :view => erb(:tracks, :layout => false) }.to_json
+        else
+          erb :index
+        end
       end
     else
       redirect '/'
