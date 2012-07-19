@@ -1,8 +1,9 @@
 <% if @tracks.any? %>
+  <h2>Search results</h2>
   <ol class="tracks">
     <% @tracks.each do |track| %>
       <li>
-        <h2><%= track.name %></h2>
+        <h3><%= track.name %></h3>
         <p><%= track.artists.map { |a| a.name }.join(', ') %></p>
         <form action="/add" method="post">
           <input type="hidden" name="uri" value="<%= track.uri %>">

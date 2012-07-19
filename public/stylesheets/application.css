@@ -70,6 +70,10 @@ header h1{
   text-align:center;
   text-shadow:1px 1px 0 #075220;
 }
+header h1 a{
+  color:#fff;
+  text-decoration: none;
+}
 
 /*** Main ***/
 section{
@@ -82,7 +86,7 @@ section form.search{
   padding:10px 5%;
   text-align:center;
   border-bottom:1px solid #ccc;
-  background-color: #fff;
+  background-color: #e8e8e8;
 }
 section form.search input{
   width:65%;
@@ -101,6 +105,23 @@ section form.search button{
 section div.tracks{
   min-height:100px
 }
+section div.tracks h2{
+  padding:3px 5%;
+  width: 90%;
+  color: #fff;
+  font-size:1.6em;
+  font-weight: bold;
+  text-shadow:1px 1px 0 #075220;
+  border-top:1px solid #075220;
+  border-bottom:1px solid #075220;
+  background: #007828;
+  background: -moz-linear-gradient(top,  #075220 0%, #007828 20%, #007828 80%, #075220 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#007828), color-stop(100%,#075220));
+  background: -webkit-linear-gradient(top,  #075220 0%, #007828 20%, #007828 80%, #075220 100%);
+  background: -o-linear-gradient(top,  #075220 0%, #007828 20%, #007828 80%, #075220 100%);
+  background: -ms-linear-gradient(top,  #075220 0%, #007828 20%, #007828 80%,#075220 100%);
+  background: linear-gradient(top,  #075220 0%, #007828 20%, #007828 80%, #075220 100%);
+}
 section ol li{
   width:90%;
   padding:0.8em 5%;
@@ -111,7 +132,7 @@ section ol li{
 section ol li:last-child{
   border:none;
 }
-section ol li h2{
+section ol li h3{
   font-size:1.6em;
   margin-bottom:0;
 }

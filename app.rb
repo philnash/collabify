@@ -10,7 +10,8 @@ set :env, ENV["RACK_ENV"]
 $redis = Redis.connect(:url => ENV['REDISTOGO_URL'])
 
 get '/' do
-  erb :index
+  @tracks = track_list
+  erb :list
 end
 
 get '/search.?:format?' do
@@ -65,9 +66,7 @@ post '/clear_queue' do
 end
 
 get '/list.?:format?' do
-  length = $redis.llen 'collabify:tracks'
-  @tracks = $redis.lrange 'collabify:tracks', 0, length
-  @tracks.map! { |t| JSON.parse(t) }
+  @tracks = track_list
   if params[:format] == 'js'
     content_type :json
     @tracks.to_json
@@ -76,3 +75,11 @@ get '/list.?:format?' do
   end
 end
 
+helpers do
+  def track_list
+    length = $redis.llen 'collabify:tracks'
+    tracks = $redis.lrange 'collabify:tracks', 0, length
+    tracks.map! { |t| JSON.parse(t) }
+    tracks
+  end
+end

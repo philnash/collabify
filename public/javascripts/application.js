@@ -65,6 +65,7 @@ $(function(){
     spinner = new Spinner(spinOptions);
     $tracks.empty();
     spinner.spin($tracks[0]);
+    $tracks.prepend('<h2>Loading</h2>');
     Collabify.ajax($form, {
       success: function(data){
         spinner.stop();

@@ -1,9 +1,10 @@
 <div class="tracks">
+  <h2>In the playlist</h2>
   <% if @tracks.any? %>
     <ol class="tracks">
       <% @tracks.each do |track| %>
         <li>
-          <h2><%= track['track'] %></h2>
+          <h3><%= track['track'] %></h3>
           <p><%= track['artist'] %></p>
         </li>
       <% end %>
