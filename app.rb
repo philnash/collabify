@@ -5,6 +5,7 @@ set :session_secret, 'f2580028413ac5ea0894c1e7a88a7442e4fcf69507144a78d61dc3f76d
 use Rack::Flash
 
 set :env, ENV["RACK_ENV"]
+REDIRECT_URL = "http://www.youtube.com/watch?v=dQw4w9WgXcQ"
 
 # $redis = Redis.new
 $redis = Redis.connect(:url => ENV['REDISTOGO_URL'])
@@ -49,14 +50,30 @@ get '/search.?:format?' do
 end
 
 post '/add.?:format?' do
-  track = params.select { |k,v| ['uri', 'track', 'artist'].include?(k) }.to_json
-  if $redis.rpush 'collabify:tracks', track
-    message = "Sounds good to me, it's in the queue."
+  if params['track'].match(/^never gonna give you up/i)
     if params[:format] == 'js'
-      {:status => 200, :message => message, :type => 'notice'}.to_json
+      {:status => 302, :redirect => REDIRECT_URL}.to_json
     else
-      flash[:notice] = message
-      redirect '/'
+      redirect REDIRECT_URL
+    end
+  else
+    track = params.select { |k,v| ['uri', 'track', 'artist'].include?(k) }.to_json
+    if $redis.rpush 'collabify:tracks', track
+      message = "Sounds good to me, it's in the queue."
+      if params[:format] == 'js'
+        {:status => 200, :message => message, :type => 'notice'}.to_json
+      else
+        flash[:notice] = message
+        redirect '/'
+      end
+    else
+      message = "Something went wrong, please try again"
+      if params[:format] == 'js'
+        {:status => 500, :message => message, :type => 'error'}.to_json
+      else
+        flash[:error] = message
+        redirect '/'
+      end
     end
   end
 end

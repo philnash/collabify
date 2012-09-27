@@ -89,8 +89,15 @@ $(function(){
     Collabify.ajax($form, {
       success: function(data){
         spinner.stop();
-        $form.html('<p>✔</p>');
-        Collabify.displayFlash(data.message, data.type);
+        if(data.status == 200){
+          $form.html('<p>✔</p>');
+          Collabify.displayFlash(data.message, data.type);
+        }else if(data.status == 302){
+          window.location.href = data.redirect
+        }else if(data.status == 500){
+          $form.html('<p>+</p>');
+          Collabify.displayFlash(data.message, data.type);
+        }
       }
     });
   });
