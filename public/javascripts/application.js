@@ -55,6 +55,13 @@ $(function(){
     }
   });
 
+  var $nowPlaying = $('.now-playing');
+  if(!!$nowPlaying[0]){
+    $('html, body').animate({
+         scrollTop: $nowPlaying.offset().top
+     }, 500);
+  }
+
   $('form.search').on('submit', function(e){
     var $form = $(this),
         $tracks = $('div.tracks'),

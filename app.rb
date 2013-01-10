@@ -12,6 +12,7 @@ $redis = Redis.connect(:url => ENV['REDISTOGO_URL'])
 
 get '/' do
   @tracks = track_list
+  @now_playing = $redis.get 'collabify:now-playing'
   erb :list
 end
 
@@ -79,6 +80,15 @@ get '/list.?:format?' do
     @tracks.to_json
   else
     erb :list
+  end
+end
+
+post '/now-playing.json' do
+  track = params[:track]
+  if $redis.set 'collabify:now-playing', track
+    {:status => 200}.to_json
+  else
+    {:status => 500}.to_json
   end
 end
 

@@ -3,7 +3,7 @@
   <% if @tracks.any? %>
     <ol class="tracks">
       <% @tracks.each do |track| %>
-        <li>
+        <li<%= ' class="now-playing"' if @now_playing && track['uri'] == @now_playing %>>
           <h3><%= track['track'] %></h3>
           <p><%= track['artist'] %></p>
         </li>

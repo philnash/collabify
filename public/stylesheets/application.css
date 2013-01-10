@@ -129,6 +129,9 @@ section ol li{
   clear:both;
   position: relative;
 }
+section ol li.now-playing{
+  background: #ffc;
+}
 section ol li:last-child{
   border:none;
 }
